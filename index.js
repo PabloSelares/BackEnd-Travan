@@ -24,7 +24,7 @@ mongoose.connection.on("error", (err) => {
 
 
 app.use('/api', productRouter);
-app.use('/api/user', userRouter);
+app.use('/api', userRouter);
 // A GENTE TERMINAR DPS
 
 const PORT = process.env.PORT
