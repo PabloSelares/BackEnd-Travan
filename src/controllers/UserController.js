@@ -1,5 +1,6 @@
 import User from '../models/UserModel.js';
-import aiService from '../services/aiService.js';
+import iaService from '../services/IaService.js';
+
 
 const userController = {
     getById: async (req, res) => {
@@ -40,7 +41,7 @@ const userController = {
       
     },
     talkwithGemini: async(req,res) => {
-        const result =await aiService.prompt(req.body.prompt)
+        const result =await iaService.prompt(req.body.prompt)
         res.status(200).json({ message: 'User created successfully', result });
     }
 };

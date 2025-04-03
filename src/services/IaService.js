@@ -1,26 +1,26 @@
 import dotenv from 'dotenv';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 dotenv.config();
 
 const geminiKey = process.env.GEMINI_KEY;
-const genAI = new GoogleGenerativeAI(geminiKey)
+const genAI = new GoogleGenerativeAI(geminiKey);
 
-const model = genAI.getGenerativeAiModel('geminiKey')({
-    model: 'gemini-2.0-flash-thinking-expo-01-21'
 
-})
+const model = genAI.getGenerativeModel({ 
+  model: "gemini-pro"
+});
 
 const gemini = {
-    prompt: async (prompt) => {
-        const p = {
-            "content": [
-                {
-                    "parts": [
-                        { "text": prompt }
-                    ]
-                }
-            ]
-        }
-        const result= await model.generateContent(p,{timeout: 10000})
-          return result.response
+  prompt: async (prompt) => {
+    try {
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      return response.text();
+    } catch (error) {
+      console.error("Error generating content:", error);
+      throw error;
     }
-}
+  }
+};
+
+export default gemini;
