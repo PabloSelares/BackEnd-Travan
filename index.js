@@ -4,9 +4,40 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import productRouter from './src/routers/ProductRouter.js';
 import userRouter from './src/routers/UserRouter.js';
+import http from 'http';
+import { WebSocketServer, WebSocket } from 'ws'; 
 
 dotenv.config();
+
 const app = express();
+const server = http.createServer(app); 
+const ws = new WebSocketServer({ server });
+
+const clients = new Set();
+
+ws.on('connection', (client) => { 
+  clients.add(client);
+  console.log("Cliente acabou de se conectar");
+
+  client.on("message", (message) => {
+    const msg = message.toString()
+    for (let c of clients) {
+      if (c.readyState === WebSocket.OPEN) { 
+        if (msg && Object.keys(msg).length > 0) {
+          c.send(msg);
+        } else {
+          console.warn("Tentativa de enviar uma mensagem vazia!");
+        } 
+      }
+    }
+  });
+
+  client.on('close', () => {
+    clients.delete(client);
+    console.log("Cliente removido do socket");
+  });
+});
+
 app.use(express.json());
 app.use(cors());
 
@@ -22,12 +53,11 @@ mongoose.connection.on("error", (err) => {
   console.error("❌ MongoDB connection error:", err.message);
 });
 
-
 app.use('/api', productRouter);
 app.use('/api', userRouter);
-// A GENTE TERMINAR DPS
 
-const PORT = process.env.PORT
-app.listen(PORT, () => {
+const PORT = process.env.PORT 
+
+server.listen(PORT, () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
 });
