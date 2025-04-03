@@ -53,6 +53,7 @@ mongoose.connection.on("error", (err) => {
   console.error("❌ MongoDB connection error:", err.message);
 });
 
+
 app.use('/api', productRouter);
 app.use('/api', userRouter);
 
