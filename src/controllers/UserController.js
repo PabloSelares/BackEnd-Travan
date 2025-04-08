@@ -43,6 +43,11 @@ const userController = {
     talkwithGemini: async(req,res) => {
         const result =await iaService.prompt(req.body.prompt)
         res.status(200).json({ message: 'User created successfully', result });
+    },
+    longContext: async(req,res) => {
+        const pdfPath = './src/context/pabloselares.pdf' // Corrigido: `pdfpath` para `pdfPath` (parâmetro)
+        const result =await iaService.longContext(req.body.prompt, pdfPath);
+        res.status(200).json({ message:  result.text() });
     }
 };
 
