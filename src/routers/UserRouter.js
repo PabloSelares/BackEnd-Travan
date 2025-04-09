@@ -4,6 +4,7 @@ import userController from '../controllers/UserController.js';
 const router = express.Router();
 
 router.route('/user').post(userController.create);  
+router.route('/user/login').post(userController.login);  
 router.route('/user/prompt')
 .post((req, res) => userController.talkwithGemini (req, res)); // Corrigido: `talkWithGemini` para `talkwithGemini` (parâmetro)
 
