@@ -5,7 +5,8 @@ import mongoose from 'mongoose';
 import productRouter from './src/routers/ProductRouter.js';
 import userRouter from './src/routers/UserRouter.js';
 import http from 'http';
-import { WebSocketServer, WebSocket } from 'ws'; 
+import { WebSocketServer } from 'ws'; 
+import AiService from './src/services/IaService.js';
 
 dotenv.config();
 
@@ -17,24 +18,30 @@ const clients = new Set();
 
 ws.on('connection', (client) => { 
   clients.add(client);
-  console.log("Cliente acabou de se conectar");
+  console.log("🟢 Cliente acabou de se conectar");
 
-  client.on("message", (message) => {
-    const msg = message.toString()
-    for (let c of clients) {
-      if (c.readyState === WebSocket.OPEN) { 
-        if (msg && Object.keys(msg).length > 0) {
-          c.send(msg);
-        } else {
-          console.warn("Tentativa de enviar uma mensagem vazia!");
-        } 
-      }
+  client.on("message", async (message) => {
+    try {
+      const msg = message.toString();
+      console.log(`📩 Mensagem recebida: ${msg}`);
+
+      const response = await AiService.longContext(msg, './src/context/pabloselares.pdf');
+
+      const responseObject = {
+        text: response.text(),
+        sentBy: 'Gemini'
+      };
+
+      // Enviar a resposta como string JSON
+      client.send(JSON.stringify(responseObject));
+    } catch (error) {
+      console.error("❌ Erro ao processar mensagem:", error.message);
     }
   });
 
-  client.on('close', () => {
+  client.on("close", () => {
     clients.delete(client);
-    console.log("Cliente removido do socket");
+    console.log("🔴 Cliente desconectado");
   });
 });
 
@@ -42,23 +49,22 @@ app.use(express.json());
 app.use(cors());
 
 mongoose.connect(process.env.MONGODB_URL)
-  .then(() => console.log('Conectado ao MongoDB'))
-  .catch(err => console.error('Erro ao conectar:', err));
+  .then(() => console.log('✅ Conectado ao MongoDB'))
+  .catch(err => console.error('❌ Erro ao conectar:', err));
 
 mongoose.connection.on("connected", () => {
-  console.log("✅ Connected to MongoDB successfully!");
+  console.log("✅ Conexão com MongoDB ativa");
 });
 
 mongoose.connection.on("error", (err) => {
-  console.error("❌ MongoDB connection error:", err.message);
+  console.error("❌ Erro na conexão MongoDB:", err.message);
 });
-
 
 app.use('/api', productRouter);
 app.use('/api', userRouter);
 
-const PORT = process.env.PORT 
+const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, () => {
-  console.log(`🚀 Server is running on http://localhost:${PORT}`);
+  console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
 });

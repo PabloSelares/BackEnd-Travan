@@ -1,7 +1,6 @@
 import User from '../models/UserModel.js';
 import iaService from '../services/IaService.js';
 
-
 const userController = {
     getById: async (req, res) => {
         try {
@@ -32,22 +31,30 @@ const userController = {
 
     create: async (req, res) => {
         try {
-        
             const result = await User.create(req.body);
             res.status(201).json({ message: 'User created successfully', result });
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
-      
     },
-    talkwithGemini: async(req,res) => {
-        const result =await iaService.prompt(req.body.prompt)
-        res.status(200).json({ message: 'User created successfully', result });
+
+    talkwithGemini: async (req, res) => {
+        try {
+            const result = await iaService.prompt(req.body.prompt);
+            res.status(200).json({ message: 'Resposta do Gemini', result });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
     },
-    longContext: async(req,res) => {
-        const pdfPath = './src/context/pabloselares.pdf' // Corrigido: `pdfpath` para `pdfPath` (parâmetro)
-        const result =await iaService.longContext(req.body.prompt, pdfPath);
-        res.status(200).json({ message:  result.text() });
+
+    longContext: async (req, res) => {
+        try {
+            const pdfPath = './src/context/pabloselares.pdf';
+            const result = await iaService.longContext(req.body.prompt, pdfPath);
+            res.status(200).json({ message: result.text() });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
     }
 };
 
