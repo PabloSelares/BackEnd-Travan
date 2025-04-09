@@ -8,6 +8,11 @@
 
         "@google/generative-ai": "^0.24.0",
 
+<<<<<<< HEAD
+=======
+        "bcrypt": "^5.1.1",
+
+>>>>>>> 75bf14b684fd4b16fe66a391f818d70e77ffca95
         "cors": "^2.8.5",
 
         "dotenv": "^16.4.7",
@@ -16,6 +21,11 @@
 
         "http": "^0.0.1-security",
 
+<<<<<<< HEAD
+=======
+        "jsonwebtoken": "^9.0.2",
+
+>>>>>>> 75bf14b684fd4b16fe66a391f818d70e77ffca95
         "mongoose": "^8.12.2",
 
         "nodemon": "^3.1.9",
@@ -26,7 +36,11 @@
 
     "scripts": {
 
+<<<<<<< HEAD
         "dev": "nodemon ./index.js"
+=======
+        "dev": "nodemon index.js"
+>>>>>>> 75bf14b684fd4b16fe66a391f818d70e77ffca95
 
     }
 
