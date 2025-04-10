@@ -33,9 +33,10 @@ const userController = {
 
     create: async (req, res) => {
         try {
-            const result = await User.create(req.body);
-            result.password = bcrypt.hashSync(result.password, Number(process.env.ROUNDS));
-            res.status(201).json({ message: 'User created successfully', result });
+            const user = req.body;
+            user.password = bcrypt.hashSync(user.password, Number(process.env.ROUNDS));
+            const newUser = await User.create(user)
+            res.status(201).json({ message: 'User created successfully', newUser });
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
@@ -65,7 +66,7 @@ const userController = {
             const { email, password } = (req.body);
             const userResult = await User.findOne({ email: email });
             if (!userResult) throw new Error('Credenciais invalidos');
-            const { __v, _id, ...user } = userResult.toObject();
+            const { __v, _id,...user } = userResult.toObject();
             const senhaIsValid = await bcrypt.compare(password, userResult.password);
             if (!senhaIsValid) throw new Error('Credenciais invalidos');
 
