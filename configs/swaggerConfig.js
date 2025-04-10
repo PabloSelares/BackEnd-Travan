@@ -9,22 +9,22 @@ const options = {
       version: '1.0.0',
       description: 'Documentação da API feita com Swagger',
     },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        }
+      }
+    },
     servers: [
       {
         url: 'http://localhost:3000/api',
       },
     ],
   },
-  components: {
-    securitySchemes: {
-      bearerAuth: {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-      }
-    }
-  },
-  apis: ['./src/routers/*.js'], // Caminho para os arquivos com as rotas e comentários JSDoc
+  apis: ['./src/routers/*.js']
 };
 
 const swaggerSpec = swaggerJSDoc(options);
