@@ -4,10 +4,13 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import productRouter from './src/routers/ProductRouter.js';
 import userRouter from './src/routers/UserRouter.js';
+import compraRouter from './src/routers/CompraRouter.js';
 import http from 'http';
 import { WebSocketServer, WebSocket } from 'ws'; 
 import middleware from './authMiddleware.js';
 import AiService from './src/services/IaService.js';
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './configs/swaggerConfig.js';
 
 dotenv.config();
 
@@ -55,7 +58,10 @@ mongoose.connect(process.env.MONGODB_URL)
 
 app.use(middleware);
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 app.use('/api', productRouter);
+app.use('/api', compraRouter);
 app.use('/api', userRouter);
 
 const PORT = process.env.PORT || 3000;
