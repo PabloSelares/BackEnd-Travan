@@ -1,11 +1,11 @@
 import mongoose from 'mongoose'
 
-const schema = new Schema({
-    name: { type: String, required: true },
-    description: { type: String, required: true },
-    price: { type: Number, required: true },
-    category: { type: String, required: true },
+const Schema = new mongoose.Schema({
+    origem: { type: String, required: true },
+    destino: { type: String, required: true },
+    preco: { type: Number, required: true },
+    desconto: { type: String },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
-    })
-    export default mongoose.model('Product', schema)    
+});
+export default mongoose.model('Product', Schema)    
