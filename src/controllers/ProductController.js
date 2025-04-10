@@ -4,7 +4,7 @@ const productController = {
         try {
             const product = req.body
             const newProduct = await Product.create(product)
-            res.status(201).json({ message: 'Product created successfully', newProduct })
+            res.status(201).json({ message: 'Viagem criada com sucesso!', newProduct })
         } catch (error) {
             res.status(500).json({ message: error.message })
         }
