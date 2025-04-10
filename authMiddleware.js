@@ -5,9 +5,9 @@ const middleware = (req, res, next) => {
     const method = req.method;
     let token = req.headers.authorization;
 
-    const nonAuthorizedPaths = ["/api/user", "/api/user/login"];
+    const nonAuthorizedPaths = ["/api/user", "/api/user/login", "/api-docs"];
 
-    if (nonAuthorizedPaths.includes(path) && method === "POST") {
+    if (nonAuthorizedPaths.includes(path) && method === "POST" || method === "GET") {
         return next();
     } else if (!token) {
         return res.status(401).json({ message: "Token não encontrado!" });
