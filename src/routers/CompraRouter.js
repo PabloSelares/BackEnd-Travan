@@ -14,6 +14,8 @@ const router = express.Router();
  *   get:
  *     summary: Retorna todas as compras
  *     tags: [Compras]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Lista de compras retornada com sucesso
@@ -29,6 +31,8 @@ router.route('/compra')
  *   get:
  *     summary: Retorna uma compra por ID
  *     tags: [Compras]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id

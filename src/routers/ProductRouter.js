@@ -15,6 +15,8 @@ import ProductController from '../controllers/ProductController.js'
  *   get:
  *     summary: Lista todos as viagens
  *     tags: [Viagens]
+*     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Lista de viagens
@@ -29,6 +31,8 @@ router.route('/viagens')
  *   post:
  *     summary: cria uma nova viagem
  *     tags: [Viagens]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -74,6 +78,8 @@ router.route('/viagem')
  *   get:
  *     summary: Lista uma viagem específica
  *     tags: [Viagens]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Lista viagem por id
