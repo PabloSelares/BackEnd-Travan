@@ -1,10 +1,79 @@
 import express from 'express';
-import compraController from '../controllers/CompraController';
+import compraController from '../controllers/CompraController.js';
 const router = express.Router();
+/**
+ * @swagger
+ * tags:
+ *   name: Compras
+ *   description: Endpoints relacionados às compras de produtos
+ */
 
-router.route('/compra/:id')
-    .get(compraController.getById)
-router.route('/compra')
-    .post(compraController.create)
+/**
+ * @swagger
+ * /compra:
+ *   get:
+ *     summary: Retorna todas as compras
+ *     tags: [Compras]
+ *     responses:
+ *       200:
+ *         description: Lista de compras retornada com sucesso
+ *       500:
+ *         description: Erro ao buscar as compras
+ */
 router.route('/compra')
     .get(compraController.getAll)
+
+/**
+ * @swagger
+ * /compra/{id}:
+ *   get:
+ *     summary: Retorna uma compra por ID
+ *     tags: [Compras]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID da compra
+ *     responses:
+ *       200:
+ *         description: Compra encontrada
+ *       404:
+ *         description: Compra não encontrada
+ *       500:
+ *         description: Erro ao buscar compra
+ */
+router.route('/compra/:id')
+    .get(compraController.getById)
+/**
+ * @swagger
+ * /compra:
+ *   post:
+ *     summary: Cria uma nova compra
+ *     tags: [Compras]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - produto
+ *             properties:
+ *               produto:
+ *                 type: string
+ *                 description: ID do produto comprado
+ *                 example: 661672b78c1a88d73c3d9e45
+ *     responses:
+ *       201:
+ *         description: Compra criada com sucesso
+ *       500:
+ *         description: Erro ao criar a compra
+ */
+router.route('/compra')
+    .post(compraController.create)
+
+
+
+export default router;
