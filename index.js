@@ -6,7 +6,7 @@ import productRouter from './src/routers/ProductRouter.js';
 import userRouter from './src/routers/UserRouter.js';
 import http from 'http';
 import { WebSocketServer, WebSocket } from 'ws'; 
-
+import middleware from './authMiddleware.js';
 dotenv.config();
 
 const app = express();
@@ -42,18 +42,18 @@ app.use(express.json());
 app.use(cors());
 
 mongoose.connect(process.env.MONGODB_URL)
-  .then(() => console.log('Conectado ao MongoDB'))
-  .catch(err => console.error('Erro ao conectar:', err));
+  .then(() => console.log("✅ Connected to MongoDB successfully!"))
+  .catch(err => console.error('❌ MongoDB connection error:', err));
 
-mongoose.connection.on("connected", () => {
-  console.log("✅ Connected to MongoDB successfully!");
-});
+// mongoose.connection.on("connected", () => {
+//   console.log();
+// });
 
-mongoose.connection.on("error", (err) => {
-  console.error("❌ MongoDB connection error:", err.message);
-});
+// mongoose.connection.on("error", (err) => {
+//   console.error("❌ MongoDB connection error:", err.message);
+// });
 
-
+app.use(middleware);
 app.use('/api', productRouter);
 app.use('/api', userRouter);
 
