@@ -46,7 +46,7 @@ const userController = {
         try {
 
             const result = await iaService.prompt(req.body.prompt)
-            res.status(200).json({ message: 'User created successfully', result });
+            res.status(200).json({ response: result });
 
         } catch (e) {
             res.status(500).json({ message: e.message });
