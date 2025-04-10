@@ -5,7 +5,7 @@ const middleware = (req, res, next) => {
     const method = req.method;
     let token = req.headers.authorization;
 
-    const nonAuthorizedPaths = ["/api/user", "/api/user/login", "/api-docs"];
+    const nonAuthorizedPaths = ["/api/user", "/api/user/login"];
 
     if (nonAuthorizedPaths.includes(path) && method === "POST" || method === "GET") {
         return next();
