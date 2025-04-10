@@ -56,6 +56,8 @@ router.route('/compra/:id')
  *   post:
  *     summary: Cria uma nova compra
  *     tags: [Compras]
+*     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:

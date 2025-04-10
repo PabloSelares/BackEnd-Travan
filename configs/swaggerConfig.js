@@ -15,6 +15,15 @@ const options = {
       },
     ],
   },
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      }
+    }
+  },
   apis: ['./src/routers/*.js'], // Caminho para os arquivos com as rotas e comentários JSDoc
 };
 
