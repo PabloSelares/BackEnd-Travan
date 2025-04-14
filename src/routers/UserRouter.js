@@ -32,10 +32,10 @@ const router = express.Router();
  *                 example: João Silva
  *               email:
  *                 type: string
- *                 example: joao@email.com
+ *                 example: joao@gmail.com
  *               password:
  *                 type: string
- *                 example: senha123
+ *                 example: 123456
  *               role:
  *                 type: string
  *                 example: CLIENT
@@ -65,7 +65,7 @@ const router = express.Router();
  *                 example: joao@email.com
  *               password:
  *                 type: string
- *                 example: senha123
+ *                 example: 123456
  *     responses:
  *       200:
  *         description: Login bem-sucedido com token JWT
@@ -192,19 +192,40 @@ const router = express.Router();
  *       200:
  *         description: Resposta baseada no contexto
  */
-
-
+/**
+ * @swagger
+ * /user/findByEmail/{email}:
+ *   get:
+ *     summary: Busca usuário por Email
+ *     tags: [Usuários]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: email
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Email do usuário
+ *     responses:
+ *       200:
+ *         description: Usuário encontrado
+ *       500:
+ *         description: Erro ao buscar usuário
+ *
+ */
 router.route('/user').post(userController.create);
 router.route('/user/login').post(userController.login);
 router.route('/user/prompt')
-  .post((req, res) => userController.talkwithGemini(req, res)); // Corrigido: `talkWithGemini` para `talkwithGemini` (parâmetro)
+  .post((req, res) => userController.talkwithGemini(req, res)); 
 
 router.route('/user/longcontext')
-  .post((req, res) => userController.longContext(req, res)); // Corrigido: `talkWithGemini` para `talkwithGemini` (parâmetro)
+  .post((req, res) => userController.longContext(req, res)); 
 
 router.route('/user/:id')
   .get(userController.getById)
   .put(userController.update)
   .delete(userController.delete);
-
+router.route('/user/findByemail/:email')
+  .get(userController.getByEmail);
 export default router;
