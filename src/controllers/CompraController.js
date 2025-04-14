@@ -1,15 +1,20 @@
 import Compra from '../models/CompraModel.js';
 import Product from '../models/ProductModel.js';
+import User from '../models/UserModel.js';
 
 const compraController = {
     create: async (req, res) => {
         try {
-            const id = req.body.produto;
+            const idProduto = req.body.produto;
+            const idComprador = req.body.comprador;
             if (!id) throw new Error('ID do produto não fornecido');
             let produto = await Product.find({ _id: id });
+            let comprador = await User.find({ _id: id });
             if (!produto) throw new Error('Produto não encontrado');
             let compra = {
-                produto: id
+                produto: idProduto,
+                comprador: idComprador,
+                message: `Pagamento de ${produto.preco} recebido com sucesso!\nViagem de ${comprador.name} saindo de ${produto.origem} para ${produto.destino} realizada com sucesso!`,
             };
             compra = await Compra.create(compra);
             res.status(201).json({ message: 'Compra realizada com sucesso', compra });
@@ -23,17 +28,17 @@ const compraController = {
     getAll: async (req, res) => {
         try {
             const compras = await Compra.find().populate("produto").lean();
-    
+
             const comprasFiltradas = compras.map(compra => {
                 const { __v, ...compraSemV } = compra;
                 const { createdAt, updatedAt, __v: __vProduto, ...produtoFiltrado } = compra.produto || {};
-    
+
                 return {
                     ...compraSemV,
                     produto: produtoFiltrado
                 };
             });
-    
+
             res.status(200).json(comprasFiltradas);
         } catch (error) {
             res.status(500).json({ message: error.message });
