@@ -5,8 +5,10 @@ import jwt from 'jsonwebtoken';
 
 const userController = {
     getById: async (req, res) => {
+        const id = req.params.id
         try {
-            const result = await User.getById(req.params.id);
+            const result = await User.findById({ _id: id });
+            if (!result) throw new Error('Usuário não encontrado');
             res.status(200).json(result);
         } catch (error) {
             res.status(500).json({ message: error.message });
@@ -66,7 +68,7 @@ const userController = {
             const { email, password } = (req.body);
             const userResult = await User.findOne({ email: email });
             if (!userResult) throw new Error('Credenciais invalidos');
-            const { __v, _id,...user } = userResult.toObject();
+            const { __v, _id, ...user } = userResult.toObject();
             const senhaIsValid = await bcrypt.compare(password, userResult.password);
             if (!senhaIsValid) throw new Error('Credenciais invalidos');
 
@@ -75,7 +77,18 @@ const userController = {
 
         } catch (e) {
             res.status(401).json({ message: "Falha no login", error: e.message });
-         }
+        }
+    },
+    getByEmail: async (req, res) => {
+        try {
+            const email = req.params.email;
+            if (!email) throw new Error('Email não informado');
+            const result = await User.findOne({ email: email });
+            if (!result) throw new Error('Usuário não encontrado');
+            res.status(200).json(result);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
     }
 };
 
