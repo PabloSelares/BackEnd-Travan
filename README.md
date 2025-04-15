@@ -33,7 +33,7 @@ Me encontre no **LinkedIn:**<br>
 - **Cadastro e autenticação de alunos, professores, perfis, turmas, disciplinas e tarefas** 
 - **Apenas professores autenticados pode operar turmas, disciplinas e tarefas** (JWT)
 - **Criptografia de senhas** com Bcrypt
-- **Documentação e testes de rotas com SwaggerUI
+- **Documentação e testes de rotas com SwaggerUI**
 - CRUD de recursos protegidos por token
 - Configuração segura usando variáveis de ambiente (Dotenv)
 - Integração profissional com MongoDB (Mongoose)
