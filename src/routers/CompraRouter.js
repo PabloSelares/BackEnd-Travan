@@ -71,6 +71,10 @@ router.route('/compra/:id')
  *                 type: string
  *                 description: ID do produto comprado
  *                 example: 661672b78c1a88d73c3d9e45
+ *               comprador:
+ *                 type: string
+ *                 description: ID do usuario que esta realizando a compra
+ *                 example: 66169a78c1h88d73c5r3f45
  *     responses:
  *       201:
  *         description: Compra criada com sucesso
