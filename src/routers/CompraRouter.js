@@ -75,6 +75,10 @@ router.route('/compra/:id')
  *                 type: string
  *                 description: ID do usuario que esta realizando a compra
  *                 example: 66169a78c1h88d73c5r3f45
+ *               message:
+ *                 type: string
+ *                 description: mensagem de cconfirmação da compra
+ *                 example: Pagamento da viagem de ${nome} saindo de ${origem} para ${destino} realizado com sucesso! Em breve enviaremos um email para ${email} com os detalhes da sua viagem.
  *     responses:
  *       201:
  *         description: Compra criada com sucesso
