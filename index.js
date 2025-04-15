@@ -29,7 +29,7 @@ ws.on('connection', (client) => {
       const msg = message.toString();
       console.log(`📩 Mensagem recebida: ${msg}`);
 
-      const response = await AiService.longContext(msg, './src/context/pabloselares.pdf');
+      const response = await AiService.longContext(msg, './src/context/BackendBruno.compras.csv');
 
       const responseObject = {
         text: response.text(),
