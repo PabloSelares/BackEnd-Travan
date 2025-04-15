@@ -7,14 +7,15 @@ const compraController = {
         try {
             const idProduto = req.body.produto;
             const idComprador = req.body.comprador;
-            if (!id) throw new Error('ID do produto não fornecido');
-            let produto = await Product.find({ _id: id });
-            let comprador = await User.find({ _id: id });
+            const message = req.body.message;
+            if (!idProduto) throw new Error('ID do produto não fornecido');
+            let produto = await Product.find({ _id: idProduto });
+            let comprador = await User.find({ _id: idComprador });
             if (!produto) throw new Error('Produto não encontrado');
             let compra = {
                 produto: idProduto,
                 comprador: idComprador,
-                message: `Pagamento de ${produto.preco} recebido com sucesso!\nViagem de ${comprador.name} saindo de ${produto.origem} para ${produto.destino} realizada com sucesso!`,
+                message: message,
             };
             compra = await Compra.create(compra);
             res.status(201).json({ message: 'Compra realizada com sucesso', compra });
