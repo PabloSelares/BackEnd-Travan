@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import fs from 'fs'; 
+import fs from 'fs';
 dotenv.config();
 
 const geminiKey = process.env.GEMINI_API_KEY;
@@ -26,10 +26,10 @@ const gemini = {
     return text;
   },
 
-  longContext: async (prompt, pdfPath) => { // Corrigido: `pdfpath` para `pdfPath` (parâmetro)
+  longContext: async (prompt, csvPath) => { // Corrigido: `pdfpath` para `pdfPath` (parâmetro)
 
-    const instructions = 
-    `You are a highly skilled travel agent with a passion for crafting unforgettable experiences. Your expertise lies in thoroughly analyzing destination information and transforming it into personalized, engaging, and inspiring travel recommendations.
+    const instructions =
+      `You are a highly skilled travel agent with a passion for crafting unforgettable experiences. Your expertise lies in thoroughly analyzing destination information and transforming it into personalized, engaging, and inspiring travel recommendations.
 
 Task Description:
 You will be provided with detailed information about a travel destination, along with a client query. Your task is to:
@@ -50,8 +50,8 @@ Objective: Provide the destination name and a final recommendation based solely 
 Language: Portuguese PT - Brazilian Portuguese.
 `;
 
-    const pdf =  await  fs.readFileSync(pdfPath); // Corrigido: readySyncFile -> readFileSync
-    const pdfBase64 =  await pdf.toString('base64');
+    const csv = await fs.readFileSync(csvPath);
+    const csvBase64 = await csv.toString('base64');
 
     const p = {
       contents: [
@@ -59,7 +59,7 @@ Language: Portuguese PT - Brazilian Portuguese.
           parts: [
             { text: instructions },
             {
-              inline_data: { mime_type: "application/pdf", data: pdfBase64 }
+              inline_data: { mime_type: "text/pdf", data: csvBase64 }
             }
           ]
         }
