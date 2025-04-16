@@ -22,12 +22,6 @@ Olá, Sou **Talles Oliveira**<br>
 <a><img src="https://avatars.githubusercontent.com/u/140225853?v=4" width="200px"></a><br>
 Olá, Sou **Francinaldo Batista** <br>
 
-📍 **Localidade:** Campina Grande, Paraíba<br>
-🎓 **Formação:** Sistemas de informação - UniFacisa, 4° Semestre<br>
-
-Me encontre no **LinkedIn:**<br>
-<a href="https://www.linkedin.com/in/gabryell-leal-rocha-1762392a0"><img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin" width="100"></a>
-
 ## ✨ Funcionalidades
 - **Cadastro e autenticação de alunos, professores, perfis, turmas, disciplinas e tarefas** 
 - **Apenas professores autenticados pode operar turmas, disciplinas e tarefas** (JWT)
