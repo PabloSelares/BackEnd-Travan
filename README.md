@@ -7,27 +7,20 @@ Todo o passo a passo de criação e desenvolvimento desse projeto se encontra ne
 
 ## ✍🏻 Autores
 
-<a><img src="https://github.com/user-attachments/assets/fa60aba8-3200-402d-8b9e-a004ed3de6cf" width="200px"></a><br><br>
-
+<a><img src="https://github.com/user-attachments/assets/fa60aba8-3200-402d-8b9e-a004ed3de6cf" width="200px"></a><br>
 Olá, Sou **Gabryell Leal** <br>
-<a><img src="https://github.com/user-attachments/assets/fa60aba8-3200-402d-8b9e-a004ed3de6cf" width="200px"></a><br><br>
 
+<a><img src="https://avatars.githubusercontent.com/u/134446830?v=4" width="200px"></a><br>
 Olá, Sou **Pablo Selares** <br>
-<a><img src="https://github.com/user-attachments/assets/fa60aba8-3200-402d-8b9e-a004ed3de6cf" width="200px"></a><br><br>
 
-Olá, Sou **Luis Eduardo Sena** <br>
-<a><img src="https://github.com/user-attachments/assets/fa60aba8-3200-402d-8b9e-a004ed3de6cf" width="200px"></a><br><br>
+<a><img src="https://avatars.githubusercontent.com/u/186224768?v=4" width="200px"></a><br>
+Olá, Sou **Luis Eduardo Sena**<br>
 
-Olá, Sou **Talles Oliveira** <br>
-<a><img src="https://github.com/user-attachments/assets/fa60aba8-3200-402d-8b9e-a004ed3de6cf" width="200px"></a><br><br>
+<a><img src="https://avatars.githubusercontent.com/u/132765451?v=4" width="200px"></a><br>
+Olá, Sou **Talles Oliveira**<br>
 
+<a><img src="https://avatars.githubusercontent.com/u/140225853?v=4" width="200px"></a><br>
 Olá, Sou **Francinaldo Batista** <br>
-
-📍 **Localidade:** Campina Grande, Paraíba<br>
-🎓 **Formação:** Sistemas de informação - UniFacisa, 4° Semestre<br>
-
-Me encontre no **LinkedIn:**<br>
-<a href="https://www.linkedin.com/in/gabryell-leal-rocha-1762392a0"><img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin" width="100"></a>
 
 ## ✨ Funcionalidades
 - **Cadastro e autenticação de alunos, professores, perfis, turmas, disciplinas e tarefas** 
@@ -60,7 +53,7 @@ Me encontre no **LinkedIn:**<br>
 ### Instalação
 ```bash
 # Clone o repositório
-git clone [https://github.com/PabloSelares/BackEnd-Travan](https://github.com/PabloSelares/BackEnd-Travan)
+git clone https://github.com/PabloSelares/BackEnd-Travan.git
 
 # Instale as dependências
 npm install
